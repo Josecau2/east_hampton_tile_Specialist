@@ -1,0 +1,30 @@
+[
+  {
+    "route": "/ (Home)",
+    "pageType": "HOME",
+    "purpose": "Primary conversion and trust",
+    "lastAudited": "2026-01-07",
+    "status": "PASS",
+    "issuesOpen": 0,
+    "issuesFixed": 3,
+    "lastChanges": {
+      "filesChanged": ["app/layout.tsx", "app/globals.css", "components/navbar1.tsx"],
+      "summary": "Fixed horizontal shift/centering, mobile overflow, sticky nav."
+    },
+    "notes": "Centered .container globally."
+  },
+  {
+    "route": "/landing",
+    "pageType": "HOME",
+    "purpose": "PPC Landing Page",
+    "lastAudited": "2026-01-07",
+    "status": "PASS",
+    "issuesOpen": 0,
+    "issuesFixed": 3,
+    "lastChanges": {
+      "filesChanged": ["app/globals.css"],
+      "summary": "Inherited global container fix."
+    },
+    "notes": "Same layout fixes apply."
+  }
+]

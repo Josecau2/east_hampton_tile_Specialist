@@ -1,0 +1,103 @@
+import { CheckCircle2, ShieldCheck } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { QuoteDialog } from "@/components/quote-dialog";
+
+type Service = {
+  title: string;
+  description: string;
+  bullets: string[];
+};
+
+interface ServicesSectionProps {
+  className?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  services?: Service[];
+  primaryCta?: { text: string; href: string };
+}
+
+const ServicesSection = ({
+  className,
+  eyebrow = "Services",
+  title = "Tile work done right",
+  description =
+    "Installation, repairs, and waterproofing for kitchens, bathrooms, and floors. We focus on clean lines, solid prep, and a finish that lasts.",
+  services = [
+    {
+      title: "Tile Installation",
+      description: "Floors, walls, showers, and backsplashes.",
+      bullets: [
+        "Layout + pattern planning",
+        "Cutting + edge finishing",
+        "Clean grout lines",
+      ],
+    },
+    {
+      title: "Shower Waterproofing",
+      description: "Build it once—build it to code.",
+      bullets: ["Pan + curb prep", "Membrane + sealing", "Slope + drainage"],
+    },
+    {
+      title: "Repair & Regrout",
+      description: "Fix cracked tiles, loose areas, and failing grout.",
+      bullets: ["Tile replacement", "Regrout / recaulk", "Sealer application"],
+    },
+  ],
+  primaryCta = { text: "Request a quote", href: "#contact" },
+}: ServicesSectionProps) => {
+  return (
+    <section className={cn("bg-background py-24 sm:py-32", className)} id="services">
+      <div className="container">
+        <div className="mb-12 flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <Badge className="bg-primary text-primary-foreground font-bold uppercase tracking-wider">{eyebrow}</Badge>
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              Prep-first approach
+            </span>
+          </div>
+          <h2 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+            {title}
+          </h2>
+          <p className="max-w-2xl text-lg text-muted-foreground leading-relaxed">
+            {description}
+          </p>
+          <div>
+            <QuoteDialog>
+              <Button>{primaryCta.text}</Button>
+            </QuoteDialog>
+          </div>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {services.map((service) => (
+            <Card key={service.title} className="h-full">
+              <CardHeader>
+                <CardTitle className="text-xl">{service.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">{service.description}</p>
+                <ul className="space-y-2 text-sm">
+                  {service.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-muted-foreground" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export { ServicesSection };
