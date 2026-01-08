@@ -1,0 +1,9 @@
+{
+  "scripts_to_add": {
+    "lighthouse": "lhci autorun",
+    "lighthouse:collect": "lhci collect",
+    "lighthouse:assert": "lhci assert",
+    "lighthouse:upload": "lhci upload"
+  },
+  "instructions": "Add these scripts to package.json under the 'scripts' section"
+}

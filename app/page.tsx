@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { Hero3 } from "@/components/hero3";
 import { Logos8 } from "@/components/logos8";
 import { Navbar1 } from "@/components/navbar1";
+import { PricingSection } from "@/components/pricing-section";
 import { ProcessSection } from "@/components/process-section";
 import { ShieldCheck, MapPin, HardHat, Clock } from "lucide-react";
 import { ServiceAreaSection } from "@/components/service-area-section";
@@ -198,6 +199,7 @@ export default function Home() {
         menu={[
           { title: "Home", url: "#" },
           { title: "Services", url: "#services" },
+          { title: "Pricing", url: "#pricing" },
           { title: "Service Area", url: "#service-area" },
           { title: "Reviews", url: "#reviews" },
           { title: "FAQ", url: "#faq" },
@@ -268,6 +270,10 @@ export default function Home() {
 
       <section id="services">
         <ServicesSection />
+      </section>
+
+      <section id="pricing">
+        <PricingSection />
       </section>
 
       <section id="gallery" className="py-20 md:py-32">
@@ -425,6 +431,7 @@ export default function Home() {
             title: "Sections",
             links: [
               { text: "Services", url: "#services" },
+              { text: "Pricing", url: "#pricing" },
               { text: "Service Area", url: "#service-area" },
               { text: "Reviews", url: "#reviews" },
               { text: "FAQ", url: "#faq" },
