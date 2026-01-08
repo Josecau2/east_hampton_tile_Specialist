@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,13 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog"
-import { SignupForm } from "@/components/signup-form"
+
+const SignupForm = dynamic(
+  () => import("@/components/signup-form").then(m => ({ default: m.SignupForm })),
+  { 
+    loading: () => <div className="flex items-center justify-center p-8"><p className="text-muted-foreground">Loading form...</p></div>
+  }
+)
 
 interface QuoteDialogProps {
   children: React.ReactNode;

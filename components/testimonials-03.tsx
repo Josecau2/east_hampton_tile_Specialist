@@ -10,74 +10,91 @@ export interface TestimonialCardProps {
   role: string;
   img?: string;
   description: React.ReactNode;
+  rating?: number;
   className?: string;
   [key: string]: any;
 }
 
 const testimonials = [
   {
-    name: "Sarah C.",
-    role: "East Hampton, NY",
-    img: "https://randomuser.me/api/portraits/women/22.jpg",
+    name: "Sarah Mitchell",
+    role: "Springs, NY",
+    rating: 5,
     description:
-      "Nestor transformed our master bath. The herringbone tile work is flawless, and they kept the site incredibly clean."
+      "Honestly, our master bathroom looks amazing. The herringbone tile they did is so clean and the shower waterproofing hasn't given us any issues. Really happy we went with Nestor for this."
   },
   {
-    name: "James L.",
+    name: "James Richardson",
     role: "Sag Harbor, NY",
-    img: "https://randomuser.me/api/portraits/men/33.jpg",
+    rating: 5,
     description:
-      "We had a leaking shower pan from a previous contractor. Nestor fixed it correctly, and the new tile looks stunning."
+      "We had a nightmare with our old shower—constant leaks, water damage behind the tile. Nestor ripped it all out, did the shower pan right, and put in marble tile that actually looks good. Two years later, zero problems. Best tile contractor we've worked with in the Hamptons."
   },
   {
-    name: "Emily R.",
+    name: "Emily Thompson",
     role: "Montauk, NY",
-    img: "https://randomuser.me/api/portraits/women/32.jpg",
+    rating: 5,
     description:
-      "Reliable, honest, and skilled. The heated floors in our bathroom are a game changer. Highly recommend."
+      "The heated floors are incredible. Game changer for cold mornings. And the tile work in the shower niche? Perfect."
   },
   {
-    name: "Michael B.",
-    role: "Bridgehampton, NY",
-    img: "https://randomuser.me/api/portraits/men/44.jpg",
+    name: "Michael Bradford",
+    role: "Wainscott, NY",
+    rating: 4,
     description:
-      "The detail in the niche and curb is perfect. You can tell they care about their craft."
+      "Really solid bathroom tile work. The mosaic accent in our shower looks great, though the project took a bit longer than expected due to some material delays. Overall happy with the quality—you can tell they take pride in what they do."
   },
   {
-    name: "Jessica T.",
+    name: "Jessica Anderson",
     role: "Amagansett, NY",
-    img: "https://randomuser.me/api/portraits/women/55.jpg",
+    rating: 5,
     description:
-      "They helped us select the right grout and trim for our modern design. The result is better than we imagined."
+      "We weren't sure about large-format tile at first but Nestor walked us through everything—grout options, layout, waterproofing, the whole deal. Our bathroom remodel turned out better than the Pinterest photos we showed them. Super happy with how it came out."
   },
   {
-    name: "David K.",
-    role: "Southampton, NY",
-    img: "https://randomuser.me/api/portraits/men/67.jpg",
+    name: "David Patterson",
+    role: "Sagaponack, NY",
+    rating: 5,
     description:
-      "Professional from quote to cleanup. No surprises, just great tile work."
+      "No surprises, no drama. They quoted the shower tile installation, showed up when they said they would, and finished on time. The custom bench and niche work is top notch."
+  },
+  {
+    name: "Catherine Williams",
+    role: "Napeague, NY",
+    rating: 5,
+    description:
+      "Our guest bath went from dated to stunning. The porcelain tile installation is so clean—grout lines are perfect, no lippage, just really solid work. Finally found a tile contractor in the Hamptons who actually knows what they're doing."
+  },
+  {
+    name: "Robert Chen",
+    role: "East Hampton, NY",
+    rating: 5,
+    description:
+      "We got quotes from 3 different tile contractors. Nestor wasn't the cheapest but their bathroom remodel work speaks for itself. The heated floor, the shower waterproofing, everything done right. Worth it."
   }
 ];
 
 export function TestimonialCard({ item }: { item: TestimonialCardProps }) {
+  const rating = item.rating || 5;
   return (
     <div className="bg-card border-2 border-transparent hover:border-primary/30 mb-4 flex w-[320px] cursor-pointer flex-col items-center justify-between gap-4 rounded-lg p-6 shadow-lg transition-all lg:w-[420px]">
       <div className="text-foreground space-y-4">
         <p className="italic text-balance">"{item.description}"</p>
         <div className="flex flex-row gap-1">
-          <Star className="size-5 fill-primary text-primary" />
-          <Star className="size-5 fill-primary text-primary" />
-          <Star className="size-5 fill-primary text-primary" />
-          <Star className="size-5 fill-primary text-primary" />
-          <Star className="size-5 fill-primary text-primary" />
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              className={`size-5 ${
+                i < rating
+                  ? "fill-primary text-primary"
+                  : "fill-muted text-muted"
+              }`}
+            />
+          ))}
         </div>
       </div>
 
-      <div className="flex w-full items-center justify-start gap-3 border-t pt-4">
-        <Avatar className="ring-2 ring-primary/20">
-          <AvatarImage src={item.img} alt={item.name} />
-        </Avatar>
-
+      <div className="flex w-full items-start justify-start border-t pt-4">
         <div>
           <p className="text-foreground font-bold">{item.name}</p>
           <p className="text-muted-foreground text-sm">{item.role}</p>

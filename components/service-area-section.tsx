@@ -45,7 +45,7 @@ const ServiceAreaSection = ({
               On-site estimates
             </span>
           </div>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
             {title}
           </h2>
           <p className="max-w-2xl text-lg text-muted-foreground">

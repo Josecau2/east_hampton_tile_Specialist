@@ -146,7 +146,8 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   return (
-    <section
+    <nav
+      aria-label="Main navigation"
       className={cn(
         "sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80",
         className,
@@ -162,10 +163,10 @@ const Navbar1 = ({
             <a href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
-                className={cn("max-h-8", logo.className)}
+                className={cn("max-h-14", logo.className)}
                 alt={logo.alt}
               />
-              <span className="text-lg font-semibold tracking-tighter">
+              <span className="text-xl font-semibold tracking-tighter">
                 {logo.title}
               </span>
             </a>
@@ -194,10 +195,10 @@ const Navbar1 = ({
             <a href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
-                className={cn("max-h-8", logo.className)}
+                className={cn("max-h-12", logo.className)}
                 alt={logo.alt}
               />
-              <span className="text-sm font-semibold tracking-tighter">
+              <span className="text-base font-semibold tracking-tighter">
                 {logo.title}
               </span>
             </a>
@@ -242,7 +243,7 @@ const Navbar1 = ({
           </div>
         </div>
       </div>
-    </section>
+    </nav>
   );
 };
 

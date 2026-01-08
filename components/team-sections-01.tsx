@@ -22,7 +22,7 @@ export default function TeamSection() {
                 className="object-cover"
               />
             </div>
-            <p className="text-sm text-muted-foreground text-center italic">Nestor and his daughter at her 1st Communion</p>
+            <p className="text-sm text-muted-foreground text-center italic">Family-owned and operated in the Hamptons</p>
           </div>
 
           {/* Content */}

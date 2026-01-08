@@ -25,9 +25,9 @@ interface ServicesSectionProps {
 const ServicesSection = ({
   className,
   eyebrow = "Services",
-  title = "Tile work done right",
+  title = "Hamptons Tile Specialists",
   description =
-    "Installation, repairs, and waterproofing for kitchens, bathrooms, and floors. We focus on clean lines, solid prep, and a finish that lasts.",
+    "Expert tile installation, shower waterproofing, and repairs for East Hampton homes. We focus on proper prep, clean lines, and a finish that lasts.",
   services = [
     {
       title: "Tile Installation",

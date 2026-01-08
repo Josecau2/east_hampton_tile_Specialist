@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import dynamic from 'next/dynamic';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,7 +71,95 @@ export const metadata: Metadata = {
   },
 };
 
-import { StickyCTA } from "@/components/sticky-cta";
+// Defer sticky CTA scroll detection to reduce initial main-thread work
+const StickyCTA = dynamic(() => import('@/components/sticky-cta').then(m => ({ default: m.StickyCTA })));
+
+// Structured Data for Local Business SEO
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": "https://easthamptontilespecialists.com/#business",
+  name: "East Hampton Tile Specialists",
+  description: "Tile installation, shower waterproofing, and repairs for bathrooms, kitchens, and floors in East Hampton and the Hamptons.",
+  url: "https://easthamptontilespecialists.com",
+  telephone: "+1-929-217-0803",
+  email: "info@easthamptontilespecialists.com",
+  image: "https://easthamptontilespecialists.com/hero/hero.avif",
+  priceRange: "$$",
+  areaServed: [
+    { "@type": "City", name: "East Hampton", "@id": "https://www.wikidata.org/wiki/Q975295" },
+    { "@type": "City", name: "Sag Harbor" },
+    { "@type": "City", name: "Montauk" },
+    { "@type": "City", name: "Amagansett" },
+    { "@type": "City", name: "Bridgehampton" },
+    { "@type": "City", name: "Southampton" },
+    { "@type": "City", name: "Water Mill" },
+    { "@type": "City", name: "Sagaponack" },
+    { "@type": "City", name: "Wainscott" },
+    { "@type": "City", name: "Springs" },
+  ],
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 40.9634,
+    longitude: -72.1848,
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "East Hampton",
+    addressRegion: "NY",
+    addressCountry: "US",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "09:00",
+      closes: "14:00",
+    },
+  ],
+  founder: {
+    "@type": "Person",
+    name: "Nestor Fajardo",
+    jobTitle: "Founder & Master Tile Specialist",
+  },
+  sameAs: [],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Tile Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Tile Installation",
+          description: "Professional tile installation for floors, walls, showers, and backsplashes.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Shower Waterproofing",
+          description: "Complete shower waterproofing including pan prep, membrane, sealing, and drainage.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Tile Repair & Regrout",
+          description: "Repair cracked tiles, regrout, recaulk, and apply sealers.",
+        },
+      },
+    ],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -79,6 +168,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-svh overflow-x-hidden antialiased`}
       >

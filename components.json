@@ -27,6 +27,7 @@
     },
     "@bundui": {
       "url": "https://bundui.io/r/{name}.json"
-    }
+    },
+    "@efferd": "https://efferd.com/r/{name}.json"
   }
 }

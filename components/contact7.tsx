@@ -47,7 +47,7 @@ const Contact7 = ({
           <Badge className="mb-4 bg-primary text-primary-foreground font-bold uppercase tracking-wider">
             Get In Touch
           </Badge>
-          <h2 className="text-3xl font-black tracking-tight text-balance md:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-black tracking-tight text-balance md:text-4xl lg:text-5xl xl:text-6xl">
             {title}
           </h2>
           <p className="mt-4 max-w-xl text-muted-foreground md:text-lg leading-relaxed">
