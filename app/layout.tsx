@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import dynamic from 'next/dynamic';
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -177,6 +178,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-svh overflow-x-hidden antialiased`}
       >
+        <Script
+          defer
+          src="https://umami.swolfai.com/script.js"
+          data-website-id="f0d382df-e08c-48cd-845c-0050c4489798"
+          strategy="afterInteractive"
+        />
         {children}
         <StickyCTA />
       </body>
