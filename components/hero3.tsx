@@ -154,7 +154,7 @@ const Hero3 = ({
                      {item.icon}
                   </div>
                   <div>
-                    <h3 className="font-black leading-tight text-foreground">{item.title}</h3>
+                    <span className="font-black leading-tight text-foreground block">{item.title}</span>
                     {item.description && (
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     )}

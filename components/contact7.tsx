@@ -107,7 +107,7 @@ const Contact7 = ({
               </span>
               <div className="flex-1">
                 <p className="text-xl font-black mb-1 text-primary-foreground">{chatLabel}</p>
-                <p className="text-primary-foreground/80 mb-4">{chatDescription}</p>
+                <p className="text-primary-foreground/90 mb-4">{chatDescription}</p>
                 <QuoteDialog>
                   <Button variant="secondary" className="font-bold">
                     {chatLink}

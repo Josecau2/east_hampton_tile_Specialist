@@ -187,11 +187,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(gallerySchema) }}
       />
-      <div className="min-h-screen bg-background text-foreground">
+      <main className="min-h-screen bg-background text-foreground">
       <Navbar1
         logo={{
           url: "#",
-          src: "/logo.png",
+          src: "/logo.webp",
           alt: "East Hampton Tile Specialists logo",
           title: "East Hampton Tile Specialists",
           className: "invert-0 dark:invert-0",
@@ -260,7 +260,7 @@ export default function Home() {
         logos={[
           { name: "Schluter Systems", logo: "/brands_logos/schluter.svg", className: "h-12 md:h-16 w-auto", url: "https://www.schluter.com" },
           { name: "Laticrete", logo: "/brands_logos/laticrete.svg", className: "h-10 md:h-14 w-auto", url: "https://laticrete.com" },
-          { name: "Mapei", logo: "/brands_logos/mapei.png", className: "h-10 md:h-14 w-auto", url: "https://www.mapei.com" },
+          { name: "Mapei", logo: "/brands_logos/mapei.webp", className: "h-10 md:h-14 w-auto", url: "https://www.mapei.com" },
           { name: "Rubi", logo: "/brands_logos/rubi.svg", className: "h-10 md:h-14 w-auto", url: "https://www.rubi.com" },
           { name: "MSI Surfaces", logo: "/brands_logos/msi.svg", className: "h-12 md:h-16 w-auto", url: "https://www.msisurfaces.com" },
         ]}
@@ -421,7 +421,7 @@ export default function Home() {
       <Footer2
         logo={{
           url: "#",
-          src: "/logo.png",
+          src: "/logo.webp",
           alt: "East Hampton Tile Specialists logo",
           title: "East Hampton Tile Specialists",
         }}
@@ -449,7 +449,7 @@ export default function Home() {
         copyright="© 2026 East Hampton Tile Specialists. All rights reserved."
         bottomLinks={[]}
       />
-    </div>
+    </main>
     </>
   );
 }

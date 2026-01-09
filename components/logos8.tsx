@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface Logo {
   name: string;
@@ -55,12 +56,11 @@ const Logos8 = ({
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-6 lg:gap-12">
             {logos.map((logo, index) => {
               const imageContent = (
-                <img
+                <Image
                   src={logo.logo}
                   alt={`${logo.name} logo`}
                   width={109}
                   height={48}
-                  loading="lazy"
                   className={cn(logo.className, "transition-all duration-300 hover:scale-110 hover:brightness-110")}
                 />
               );

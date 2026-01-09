@@ -75,7 +75,7 @@ export function ProcessSection() {
                 <div className="p-3 rounded-md bg-primary/20 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   {step.icon}
                 </div>
-                <span className="text-5xl font-black text-primary/20 select-none">
+                <span className="text-5xl font-black text-foreground select-none" aria-hidden="true">
                   {step.number}
                 </span>
               </div>

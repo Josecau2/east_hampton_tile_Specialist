@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 import { QuoteDialog } from "@/components/quote-dialog";
@@ -92,10 +93,12 @@ const Footer2 = ({
             {/* Logo section - spans 4 columns on desktop */}
             <div className="flex flex-col items-center text-center md:col-span-4 md:items-start md:text-left">
               <a href="#" className="flex flex-col items-center md:items-start gap-3">
-                <img
+                <Image
                   src={logo.src}
                   alt={logo.alt}
                   title={logo.title}
+                  width={200}
+                  height={109}
                   className="h-20 md:h-28 w-auto invert"
                 />
                 <div className="text-2xl md:text-3xl font-bold text-background leading-tight">
@@ -130,7 +133,7 @@ const Footer2 = ({
             <div className="md:col-span-8 flex flex-wrap justify-center md:justify-end gap-12 lg:gap-16">
               {menuItems.map((section, sectionIdx) => (
                 <div key={sectionIdx} className="min-w-[140px]">
-                  <h3 className="mb-4 font-bold text-primary">{section.title}</h3>
+                  <h3 className="mb-4 font-bold text-background">{section.title}</h3>
                   <ul className="space-y-3 text-background/80 text-sm">
                     {section.links.map((link, linkIdx) => (
                       <li

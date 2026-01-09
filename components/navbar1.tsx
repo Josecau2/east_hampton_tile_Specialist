@@ -1,6 +1,7 @@
 "use client";
 
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 
@@ -161,10 +162,13 @@ const Navbar1 = ({
           <div className="flex items-center gap-6">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img
+              <Image
                 src={logo.src}
-                className={cn("max-h-14", logo.className)}
+                width={154}
+                height={84}
+                className={cn("max-h-14 w-auto", logo.className)}
                 alt={logo.alt}
+                priority
               />
               <span className="text-xl font-semibold tracking-tighter">
                 {logo.title}
@@ -193,10 +197,13 @@ const Navbar1 = ({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img
+              <Image
                 src={logo.src}
-                className={cn("max-h-12", logo.className)}
+                width={132}
+                height={72}
+                className={cn("max-h-12 w-auto", logo.className)}
                 alt={logo.alt}
+                priority
               />
               <span className="text-base font-semibold tracking-tighter">
                 {logo.title}
@@ -204,7 +211,7 @@ const Navbar1 = ({
             </a>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" aria-label="Open menu">
                   <Menu className="size-4" />
                 </Button>
               </SheetTrigger>
@@ -212,9 +219,11 @@ const Navbar1 = ({
                 <SheetHeader>
                   <SheetTitle>
                     <a href={logo.url} className="flex items-center gap-2">
-                      <img
+                      <Image
                         src={logo.src}
-                        className={cn("max-h-8", logo.className)}
+                        width={88}
+                        height={48}
+                        className={cn("max-h-8 w-auto", logo.className)}
                         alt={logo.alt}
                       />
                     </a>

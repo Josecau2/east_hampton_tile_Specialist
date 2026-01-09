@@ -17,11 +17,26 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { supabase } from "@/supa/supabase"
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [fileError, setFileError] = useState("")
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState("")
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    zip: "",
+    details: ""
+  })
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -47,6 +62,95 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     fileInputRef.current?.click()
   }
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setFormData(prev => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitError("")
+    setSubmitSuccess(false)
+
+    try {
+      // Upload photos to Supabase Storage if any
+      const photoUrls: string[] = []
+
+      if (selectedFiles.length > 0) {
+        for (const file of selectedFiles) {
+          const fileName = `${Date.now()}-${file.name}`
+          const { error: uploadError } = await supabase.storage
+            .from('quote-photos')
+            .upload(fileName, file)
+
+          if (uploadError) {
+            throw new Error(`Failed to upload ${file.name}: ${uploadError.message}`)
+          }
+
+          // Get public URL for the uploaded file
+          const { data: { publicUrl } } = supabase.storage
+            .from('quote-photos')
+            .getPublicUrl(fileName)
+
+          photoUrls.push(publicUrl)
+        }
+      }
+
+      // Insert the quote submission into the database using the easthampton schema
+      const { error } = await supabase
+        .from('quotes')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            address: formData.address,
+            city: formData.city,
+            zip: formData.zip,
+            project_details: formData.details,
+            photo_urls: photoUrls
+          }
+        ])
+
+      if (error) {
+        throw error
+      }
+
+      setSubmitSuccess(true)
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        city: "",
+        zip: "",
+        details: ""
+      })
+      setSelectedFiles([])
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Failed to submit quote request. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (submitSuccess) {
+    return (
+      <Card {...props}>
+        <CardHeader>
+          <CardTitle>Thank You!</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-center text-muted-foreground">
+            Your quote request has been submitted successfully. We&apos;ll get back to you within 24 hours.
+          </p>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card {...props}>
       <CardHeader>
@@ -56,11 +160,22 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
+          {submitError && (
+            <div className="mb-4 p-3 rounded-md bg-destructive/10 text-destructive text-sm">
+              {submitError}
+            </div>
+          )}
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input id="name" type="text" placeholder="Nestor Fajardo" required />
+              <Input
+                id="name"
+                type="text"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
             </Field>
             
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -69,7 +184,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
                 />
               </Field>
@@ -78,7 +194,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="(555) 123-4567"
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   required
                 />
               </Field>
@@ -86,41 +203,45 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
             <Field>
               <FieldLabel htmlFor="address">Street Address</FieldLabel>
-              <Input 
-                id="address" 
-                type="text" 
-                placeholder="123 Main St" 
-                required 
+              <Input
+                id="address"
+                type="text"
+                value={formData.address}
+                onChange={handleInputChange}
+                required
               />
             </Field>
 
             <div className="grid grid-cols-2 gap-4">
               <Field>
                 <FieldLabel htmlFor="city">City</FieldLabel>
-                <Input 
-                  id="city" 
-                  type="text" 
-                  placeholder="East Hampton" 
-                  required 
+                <Input
+                  id="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  required
                 />
               </Field>
               <Field>
                 <FieldLabel htmlFor="zip">Zip Code</FieldLabel>
-                <Input 
-                  id="zip" 
-                  type="text" 
-                  placeholder="11937" 
-                  required 
+                <Input
+                  id="zip"
+                  type="text"
+                  value={formData.zip}
+                  onChange={handleInputChange}
+                  required
                 />
               </Field>
             </div>
 
             <Field>
               <FieldLabel htmlFor="details">Project Details</FieldLabel>
-              <Textarea 
-                id="details" 
-                placeholder="Describe your project (e.g. Master bathroom renovation, kitchen backsplash, 500 sq ft flooring...)"
+              <Textarea
+                id="details"
                 className="min-h-[100px]"
+                value={formData.details}
+                onChange={handleInputChange}
                 required
               />
             </Field>
@@ -185,7 +306,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
             <FieldGroup>
               <Field>
-                <Button type="submit" className="w-full">Submit Request</Button>
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Submit Request"}
+                </Button>
               </Field>
             </FieldGroup>
           </FieldGroup>
