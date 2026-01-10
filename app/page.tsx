@@ -246,7 +246,7 @@ export default function Home() {
           },
           {
             icon: <Clock className="size-5" />,
-            title: "20+ Years Exp",
+            title: "11+ Years Exp",
             description: "Master craftsmanship",
           },
         ]}
@@ -428,21 +428,32 @@ export default function Home() {
         tagline="Tile installation • Waterproofing • Repair"
         menuItems={[
           {
-            title: "Sections",
+            title: "Services",
             links: [
-              { text: "Services", url: "#services" },
-              { text: "Pricing", url: "#pricing" },
-              { text: "Service Area", url: "#service-area" },
-              { text: "Reviews", url: "#reviews" },
-              { text: "FAQ", url: "#faq" },
-              { text: "Contact", url: "#contact" },
+              { text: "Tile Installation", url: "#services" },
+              { text: "Shower Waterproofing", url: "#services" },
+              { text: "Tile Repair & Regrout", url: "#services" },
+              { text: "Heated Floors", url: "#services" },
+              { text: "Pricing Guide", url: "#pricing" },
             ],
           },
           {
-            title: "Get started",
+            title: "About Us",
             links: [
-              { text: "Request a quote", url: "#contact" },
-              { text: "Call", url: "tel:9292170803" },
+              { text: "Our Process", url: "#process" },
+              { text: "Meet the Founder", url: "#team" },
+              { text: "Service Area", url: "#service-area" },
+              { text: "Customer Reviews", url: "#reviews" },
+              { text: "Gallery", url: "#gallery" },
+            ],
+          },
+          {
+            title: "Resources",
+            links: [
+              { text: "FAQ", url: "#faq" },
+              { text: "Request a Quote", url: "#contact" },
+              { text: "Call Us", url: "tel:9292170803" },
+              { text: "Email Us", url: "mailto:info@easthamptontilespecialists.com" },
             ],
           },
         ]}

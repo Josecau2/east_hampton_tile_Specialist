@@ -9,7 +9,7 @@ services:
     image: easthampton-tile
     container_name: easthampton
     ports:
-      - "8002:8002"
+      - "127.0.0.1:8002:8002"
     env_file:
       - .env.local
     restart: unless-stopped

@@ -91,9 +91,27 @@ const ServicesSection = ({
                     </li>
                   ))}
                 </ul>
+                <a 
+                  href="#pricing" 
+                  className="inline-block text-sm text-primary hover:underline font-medium"
+                >
+                  View pricing →
+                </a>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Cross-links to other sections */}
+        <div className="mt-12 flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+          <span>Learn more:</span>
+          <a href="#process" className="text-primary hover:underline">Our process</a>
+          <span>•</span>
+          <a href="#gallery" className="text-primary hover:underline">View our work</a>
+          <span>•</span>
+          <a href="#reviews" className="text-primary hover:underline">Customer reviews</a>
+          <span>•</span>
+          <a href="#faq" className="text-primary hover:underline">FAQ</a>
         </div>
       </div>
     </section>

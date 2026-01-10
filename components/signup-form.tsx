@@ -79,7 +79,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
       if (selectedFiles.length > 0) {
         for (const file of selectedFiles) {
-          const fileName = `${Date.now()}-${file.name}`
+          const originalExt = file.name.includes(".")
+            ? file.name.split(".").pop()?.toLowerCase()
+            : undefined
+          const safeExt = originalExt && /^[a-z0-9]+$/.test(originalExt) ? originalExt : "bin"
+          const fileName = `quotes/${crypto.randomUUID()}.${safeExt}`
           const { error: uploadError } = await supabase.storage
             .from('quote-photos')
             .upload(fileName, file)

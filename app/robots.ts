@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-  : new URL("http://localhost:3000");
+  : new URL("https://www.easthamptontilespecialists.com");
 
 export default function robots(): MetadataRoute.Robots {
   return {

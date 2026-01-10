@@ -1,8 +1,14 @@
 const { createClient } = require('@supabase/supabase-js');
 
-// Initialize Supabase client with service role key for admin operations
-const supabaseUrl = 'https://supa.swolfai.com';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY2OTUyODUzLCJleHAiOjIwODIzMTI4NTN9.9mH5hkerprZYPtJwzbA-kGNFoBWjXNnhRveBfk2Bt-0';
+// NOTE: This script is for local/admin setup tasks only.
+// Use env vars so keys/URLs are not committed to source control.
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing env vars: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY');
+  process.exit(1);
+}
 
 async function createSchema() {
   console.log('Creating easthampton schema...');
@@ -70,14 +76,19 @@ VALUES ('quote-photos', 'quote-photos', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Allow anyone to upload to the quote-photos bucket
+DROP POLICY IF EXISTS "Anyone can upload quote photos" ON storage.objects;
+DROP POLICY IF EXISTS "Quote photos are publicly accessible" ON storage.objects;
+
 CREATE POLICY "Anyone can upload quote photos" ON storage.objects
   FOR INSERT TO anon
-  WITH CHECK (bucket_id = 'quote-photos');
+  WITH CHECK (
+    bucket_id = 'quote-photos'
+    AND name LIKE 'quotes/%'
+    AND lower(storage.extension(name)) IN ('jpg','jpeg','png','webp','gif','avif','heic','heif')
+  );
 
--- Allow public access to view quote photos
-CREATE POLICY "Quote photos are publicly accessible" ON storage.objects
-  FOR SELECT TO anon
-  USING (bucket_id = 'quote-photos');
+-- Note: the bucket is public, so objects can be fetched by URL.
+-- Intentionally no anon SELECT policy on storage.objects to avoid listing/scraping.
         `
       })
     });

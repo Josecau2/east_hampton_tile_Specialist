@@ -8,7 +8,7 @@ const founder = {
 
 export default function TeamSection() {
   return (
-    <section className="py-12 lg:py-20">
+    <section className="py-12 lg:py-20" id="team">
       <div className="mx-auto max-w-7xl px-4">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Image */}
@@ -35,7 +35,7 @@ export default function TeamSection() {
 
             <div className="space-y-4 text-muted-foreground max-w-xl mx-auto lg:mx-0">
               <p>
-                Nestor Fajardo has been crafting beautiful tile installations in the NY area for over 20 years. Running the business alongside his wife, they bring a personal, dedicated touch to every project.
+                Nestor Fajardo has been crafting beautiful tile installations in the NY area for over 11 years. Running the business alongside his wife, they bring a personal, dedicated touch to every project.
               </p>
               <p>
                 Nestor is deeply passionate about tile work—especially bathrooms. He creates stunning bathroom transformations with an enthusiasm you have to see to believe. He simply can't get enough of doing bathrooms.

@@ -1,8 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#ffffff",
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,27 +23,29 @@ const geistMono = Geist_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-  : new URL("http://localhost:3000");
+  : new URL("https://www.easthamptontilespecialists.com");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "East Hampton Tile Specialists",
+    default: "East Hampton Tile Specialists | Tile Installation & Shower Waterproofing in the Hamptons",
     template: "%s | East Hampton Tile Specialists",
   },
   description:
-    "Tile installation, shower waterproofing, and repairs for bathrooms, kitchens, and floors in East Hampton and the Hamptons.",
+    "East Hampton's trusted tile specialists. Professional tile installation, shower waterproofing, and bathroom remodels in East Hampton, Sag Harbor, Montauk & the Hamptons. Free estimates.",
   keywords: [
-    "tile contractor",
-    "tile installer",
-    "bathroom tile",
-    "shower tile",
+    "East Hampton tile specialists",
+    "tile contractor East Hampton",
+    "tile installer Hamptons",
+    "bathroom tile installation",
+    "shower tile installation",
     "shower waterproofing",
     "kitchen backsplash",
-    "floor tile",
-    "tile repair",
-    "East Hampton tile contractor",
-    "Hamptons tile installer",
+    "floor tile installation",
+    "tile repair East Hampton",
+    "Hamptons tile contractor",
+    "Sag Harbor tile installer",
+    "Montauk tile contractor",
   ],
   alternates: {
     canonical: "/",
@@ -44,9 +53,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "East Hampton Tile Specialists",
+    title: "East Hampton Tile Specialists | Professional Tile Installation",
     description:
-      "Tile installation, shower waterproofing, and repairs for bathrooms, kitchens, and floors in East Hampton and the Hamptons.",
+      "East Hampton's trusted tile specialists. Professional tile installation, shower waterproofing, and bathroom remodels in the Hamptons. Free estimates.",
     siteName: "East Hampton Tile Specialists",
     images: [
       {
@@ -57,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "East Hampton Tile Specialists",
+    title: "East Hampton Tile Specialists | Tile Installation & Waterproofing",
     description:
-      "Tile installation, shower waterproofing, and repairs for bathrooms, kitchens, and floors in East Hampton and the Hamptons.",
+      "East Hampton's trusted tile specialists. Professional tile installation, shower waterproofing, and bathroom remodels in the Hamptons.",
     images: ["/hero/hero.avif"],
   },
   robots: {

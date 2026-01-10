@@ -50,11 +50,16 @@ VALUES ('quote-photos', 'quote-photos', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Allow anyone to upload to the quote-photos bucket
+DROP POLICY IF EXISTS "Anyone can upload quote photos" ON storage.objects;
+DROP POLICY IF EXISTS "Quote photos are publicly accessible" ON storage.objects;
+
 CREATE POLICY "Anyone can upload quote photos" ON storage.objects
   FOR INSERT TO anon
-  WITH CHECK (bucket_id = 'quote-photos');
+  WITH CHECK (
+    bucket_id = 'quote-photos'
+    AND name LIKE 'quotes/%'
+    AND lower(storage.extension(name)) IN ('jpg','jpeg','png','webp','gif','avif','heic','heif')
+  );
 
--- Allow public access to view quote photos
-CREATE POLICY "Quote photos are publicly accessible" ON storage.objects
-  FOR SELECT TO anon
-  USING (bucket_id = 'quote-photos');
+-- Note: the bucket is public, so objects can be fetched by URL.
+-- Intentionally no anon SELECT policy on storage.objects to avoid listing/scraping.

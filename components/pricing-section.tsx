@@ -181,6 +181,18 @@ export function PricingSection() {
             <strong className="text-foreground">Important:</strong> Prices shown are average ranges for labor only and do not include materials. Actual pricing varies based on site conditions, materials selected, project complexity, scope, and accessibility. Minimum project charge applies. All estimates are provided after an on-site evaluation and detailed consultation. Final pricing confirmed in writing before work begins.
           </p>
         </div>
+
+        {/* Cross-links */}
+        <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+          <span>Related:</span>
+          <a href="#services" className="text-primary hover:underline">Our services</a>
+          <span>•</span>
+          <a href="#process" className="text-primary hover:underline">How we work</a>
+          <span>•</span>
+          <a href="#faq" className="text-primary hover:underline">Common questions</a>
+          <span>•</span>
+          <a href="#service-area" className="text-primary hover:underline">Service area</a>
+        </div>
       </div>
     </section>
   );
